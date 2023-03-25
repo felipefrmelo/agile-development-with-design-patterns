@@ -36,6 +36,7 @@ public class MemoryAchievementStorage implements AchievementStorage {
             notifyObservers(user, existingAchievement);
         } else {
             achievements.computeIfAbsent(user, k -> new ArrayList<>()).add(achievement);
+            notifyObservers(user, achievement);
         }
 
     }

@@ -20,4 +20,9 @@ public class Point extends Achievement {
 
     }
 
+    @Override
+    public String toString() {
+        return "Point [points=" + points + ", name=" + getName() + "]";
+    }
+
 }

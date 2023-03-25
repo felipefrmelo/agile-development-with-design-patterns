@@ -10,6 +10,9 @@ public class CreationAchievementObserver implements AchievementObserver {
 
     @Override
     public void achievementUpdate(String user, Achievement achievement) {
+        if (!(achievement instanceof Point)) {
+            return;
+        }
         Point point = (Point) achievement;
         if (point.getName().equals("CREATION") && point.getPoints() >= 100) {
             storage.addAchievement(user, new Badge("INVENTOR"));

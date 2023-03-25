@@ -184,6 +184,30 @@ public class ForumServiceTest {
     }
 
     @Test
+    public void testShouldCallMockObserver44Times() {
+
+        AchievementObserver observer = new CreationAchievementObserver(storage);
+        storage.addObserver(observer);
+
+        MockObserver mockObserver = new MockObserver(storage);
+        storage.addObserver(mockObserver);
+
+        for (int i = 0; i < 21; i++) {
+            forumService.addTopic("John", "java");
+        }
+
+        assertEquals(3, storage.getAchievements("John").size());
+
+        Point point = (Point) storage.getAchievement("John", "CREATION");
+        assertEquals(105, point.getPoints());
+
+        assertNotNull(storage.getAchievement("John", "INVENTOR"));
+
+        assertEquals(44, mockObserver.getCount());
+
+    }
+
+    @Test
     public void testShouldReceivePartOfTheCommunityBadgeWhenReach100Points() {
 
         AchievementObserver observer = new ParticipationAchievementObserver(storage);
