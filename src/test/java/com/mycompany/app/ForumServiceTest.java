@@ -17,7 +17,8 @@ public class ForumServiceTest {
     @BeforeEach
     public void setUp() {
         forumServiceMock = new ForumServiceMock();
-        storage = new MemoryAchievementStorage();
+        AchievementStorageFactory.setAchievementStorage(new MemoryAchievementStorage());
+        storage = AchievementStorageFactory.getAchievementStorage();
         forumService = new ForumServiceGamificationProxy(forumServiceMock, storage);
     }
 
